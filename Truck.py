@@ -1,5 +1,5 @@
 
-
+# Create truck class
 class Truck:
     def __init__ (self, package_list):
         self.package_list = package_list
