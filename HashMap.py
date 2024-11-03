@@ -1,4 +1,6 @@
-# WGU Webinar 1 - Let's Go Hashing Code
+
+# Code is from WGU Webinar 1 - Let's Go Hashing
+
 # HashTable class using chaining.
 class ChainingHashTable:
     # Constructor with optional initial capacity parameter.
