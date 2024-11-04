@@ -14,8 +14,6 @@ hash_map = ChainingHashTable()
 # Array to hold distances
 distance_list = []
 
-address_list = []
-
 with open('csv_files/addresses.csv') as csvfile1:
     csv_address = csv.reader(csvfile1, delimiter=',')
     csv_address = list(csv_address)
@@ -43,6 +41,25 @@ with open('csv_files/package_file.csv') as csvfile3:
 
         #Insert package into hash table
         hash_map.insert(ID, p)
+
+# Method to find index of passed in address
+def find_address_index(file_name, target_address):
+    with open(file_name, mode = 'r') as csvfile:
+        csv_address = csv.reader(csvfile, delimiter=',')
+        for index, row in enumerate(csv_address):
+            if target_address in row:
+                return index
+    return -1
+## example usage of above def
+#index = find_address_index('csv_files/addresses.csv', '4001 South 700 East')
+#print(index)
+
+# method to find distance between 2 values
+def distance_between(x_val, y_val):
+    distance = csv_distance[x_val][y_val]
+    if distance == '':
+        distance = csv_distance[y_val][x_val]
+    return float(distance)
 
 
 # Load all 3 trucks
