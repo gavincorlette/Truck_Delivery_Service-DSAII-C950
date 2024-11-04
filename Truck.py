@@ -1,9 +1,9 @@
 
 # Create truck class
 class Truck:
-    def __init__ (self, package_list, address, departure_time):
+    def __init__ (self, package_list, current_address, departure_time):
         self.package_list = package_list
-        self.address = address
+        self.current_address = current_address
         self.departure_time = departure_time
 
     def __str__(self):

@@ -14,6 +14,7 @@ hash_map = ChainingHashTable()
 # Array to hold distances
 distance_list = []
 
+# Opens addresses.csv and creates a list
 with open('csv_files/addresses.csv') as csvfile1:
     csv_address = csv.reader(csvfile1, delimiter=',')
     csv_address = list(csv_address)
@@ -25,6 +26,7 @@ with open('csv_files/distances.csv') as csvfile2:
         distance_list.append(row)
         hash_map.insert(row[0], row[1])
 
+# Opens and loads package_file
 with open('csv_files/package_file.csv') as csvfile3:
     csv_package = csv.reader(csvfile3, delimiter=',')
     for row in csv_package:
