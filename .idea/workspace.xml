@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7a93902-e72f-4bb2-8d83-85c270038a8e" name="Changes" comment="messing around in main, updated addresses.csv and truck class">
+    <list default="true" id="c7a93902-e72f-4bb2-8d83-85c270038a8e" name="Changes" comment="added find_address_index and distance_between methods to main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Truck.py" beforeDir="false" afterPath="$PROJECT_DIR$/Truck.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +93,7 @@
       <workItem from="1730650247080" duration="485000" />
       <workItem from="1730650746114" duration="1000" />
       <workItem from="1730650754975" duration="40000" />
-      <workItem from="1730729312951" duration="7496000" />
+      <workItem from="1730729312951" duration="8545000" />
     </task>
     <task id="LOCAL-00001" summary="hashmap and csv files">
       <option name="closed" value="true" />
@@ -142,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730733634505</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added find_address_index and distance_between methods to main">
+      <option name="closed" value="true" />
+      <created>1730737101459</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1730737101459</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,10 +174,11 @@
     <MESSAGE value="updated package 9 address" />
     <MESSAGE value="changes to truck object and departure time" />
     <MESSAGE value="messing around in main, updated addresses.csv and truck class" />
-    <option name="LAST_COMMIT_MESSAGE" value="messing around in main, updated addresses.csv and truck class" />
+    <MESSAGE value="added find_address_index and distance_between methods to main" />
+    <option name="LAST_COMMIT_MESSAGE" value="added find_address_index and distance_between methods to main" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DSA2$Package.coverage" NAME="Package Coverage Results" MODIFIED="1730646976663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DSA2$Main.coverage" NAME="Main Coverage Results" MODIFIED="1730737006892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DSA2$Main.coverage" NAME="Main Coverage Results" MODIFIED="1730738055418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
