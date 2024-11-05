@@ -47,20 +47,20 @@ with open('csv_files/package_file.csv') as csvfile3:
 # Method to find index of passed in address
 def find_address_index(file_name, target_address):
     with open(file_name, mode = 'r') as csvfile:
-        csv_address = csv.reader(csvfile, delimiter=',')
-        for index, row in enumerate(csv_address):
+        csv_address2 = csv.reader(csvfile, delimiter=',')
+        for index, row in enumerate(csv_address2):
             if target_address in row:
                 return index
-    return -1
+    return None
 ## example usage of above def
 #index = find_address_index('csv_files/addresses.csv', '4001 South 700 East')
 #print(index)
 
 # method to find distance between 2 values
 def distance_between(x_val, y_val):
-    distance = csv_distance[x_val][y_val]
+    distance = distance_list[x_val][y_val]
     if distance == '':
-        distance = csv_distance[y_val][x_val]
+        distance = distance_list[y_val][x_val]
     return float(distance)
 
 
@@ -70,3 +70,8 @@ truck1 = Truck([15, 14, 19, 16, 13, 20, 1, 13, 15, 29, 30, 31, 34, 37, 40, 2], "
 truck2 = Truck([3, 18, 36, 38, 6, 25, 28, 32, 4, 5, 7, 8, 10, 11, 12, 17], "4001 South 700 East", datetime.timedelta(hours = 9, minutes = 5)) # leave at 9:05
 
 truck3 = Truck([9, 19, 21, 22, 23, 24, 26, 27, 33, 35, 39], "4001 South 700 East", datetime.timedelta(hours = 10, minutes = 20)) # leave at/after 10:20
+
+## Example use of distance_between function; may need to alter as I develop algorithm
+#between = distance_between(find_address_index('csv_files/addresses.csv', '195 W Oakland Ave'), find_address_index('csv_files/addresses.csv', '4580 S 2300 E'))
+#print(between)
+
