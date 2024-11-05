@@ -11,13 +11,16 @@ import datetime
 
 # Create hash table
 hash_map = ChainingHashTable()
-# Array to hold distances
+# Hold distances
 distance_list = []
+# Hold addresses
+address_list = []
 
 # Opens addresses.csv and creates a list
 with open('csv_files/addresses.csv') as csvfile1:
     csv_address = csv.reader(csvfile1, delimiter=',')
-    csv_address = list(csv_address)
+    for row in csv_address:
+        address_list.append(row[1])
 
 # Read distances.csv and insert into distance_list
 with open('csv_files/distances.csv') as csvfile2:
@@ -65,13 +68,14 @@ def distance_between(x_val, y_val):
 
 
 # Load all 3 trucks
-truck1 = Truck([15, 14, 19, 16, 13, 20, 1, 13, 15, 29, 30, 31, 34, 37, 40, 2], "4001 South 700 East", datetime.timedelta(hours = 8, minutes = 0)) # leave at 8:00
+truck1 = Truck(18, [15, 14, 19, 16, 13, 20, 1, 13, 15, 29, 30, 31, 34, 37, 40, 2], "4001 South 700 East", datetime.timedelta(hours = 8, minutes = 0), 'At Hub') # leave at 8:00
 
-truck2 = Truck([3, 18, 36, 38, 6, 25, 28, 32, 4, 5, 7, 8, 10, 11, 12, 17], "4001 South 700 East", datetime.timedelta(hours = 9, minutes = 5)) # leave at 9:05
+truck2 = Truck(18, [3, 18, 36, 38, 6, 25, 28, 32, 4, 5, 7, 8, 10, 11, 12, 17], "4001 South 700 East", datetime.timedelta(hours = 9, minutes = 5), 'At Hub') # leave at 9:05
 
-truck3 = Truck([9, 19, 21, 22, 23, 24, 26, 27, 33, 35, 39], "4001 South 700 East", datetime.timedelta(hours = 10, minutes = 20)) # leave at/after 10:20
+truck3 = Truck(18, [9, 19, 21, 22, 23, 24, 26, 27, 33, 35, 39], "4001 South 700 East", datetime.timedelta(hours = 10, minutes = 20), 'At Hub') # leave at/after 10:20
 
 ## Example use of distance_between function; may need to alter as I develop algorithm
 #between = distance_between(find_address_index('csv_files/addresses.csv', '195 W Oakland Ave'), find_address_index('csv_files/addresses.csv', '4580 S 2300 E'))
 #print(between)
 
+#def delivering_packages():

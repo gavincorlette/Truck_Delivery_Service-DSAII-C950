@@ -1,13 +1,15 @@
 
 # Create truck class
 class Truck:
-    def __init__ (self, package_list, current_address, departure_time):
+    def __init__ (self, avg_speed, package_list, current_address, departure_time, status):
+        self.avg_speed = avg_speed
         self.package_list = package_list
         self.current_address = current_address
         self.departure_time = departure_time
+        self.status = status
 
     def __str__(self):
-        return f'{self.package_list}, {self.address}, {self.departure_time}'
+        return f'{self.avg_speed}, {self.package_list}, {self.current_address}, {self.departure_time}, {self.status}'
 
     # Removes package from package_list when delivered
     def deliver_package(self, package):
