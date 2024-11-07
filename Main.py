@@ -68,11 +68,11 @@ def distance_between(x_val, y_val):
     return float(distance)
 
 # Load all 3 trucks
-truck1 = Truck(18, [15, 14, 19, 16, 13, 20, 1, 13, 15, 29, 30, 31, 34, 37, 40, 2], '4001 South 700 East', timedelta(hours = 8, minutes = 0), 'At Hub') # leave at 8:00
+truck1 = Truck(18, [15, 14, 19, 16, 13, 20, 1, 13, 15, 29, 30, 31, 34, 37, 40, 2], '4001 South 700 East', timedelta(hours = 8, minutes = 0), 'At Hub', 0.0) # leave at 8:00
 
-truck2 = Truck(18, [3, 18, 36, 38, 6, 25, 28, 32, 4, 5, 7, 8, 10, 11, 12, 17], '4001 South 700 East', timedelta(hours = 9, minutes = 5), 'At Hub') # leave at 9:05
+truck2 = Truck(18, [3, 18, 36, 38, 6, 25, 28, 32, 4, 5, 7, 8, 10, 11, 12, 17], '4001 South 700 East', timedelta(hours = 9, minutes = 5), 'At Hub', 0.0) # leave at 9:05
 
-truck3 = Truck(18, [9, 19, 21, 22, 23, 24, 26, 27, 33, 35, 39], '4001 South 700 East', timedelta(hours = 10, minutes = 20), 'At Hub') # leave at/after 10:20
+truck3 = Truck(18, [9, 19, 21, 22, 23, 24, 26, 27, 33, 35, 39], '4001 South 700 East', timedelta(hours = 10, minutes = 20), 'At Hub', 0.0) # leave at/after 10:20
 
 # Method to find the shortest distance between two addresses
 def min_distance_from(current_address, remaining_addresses):
@@ -112,7 +112,6 @@ print(address)'''
 
 def deliver_packages(truck):
 
-    total_mileage = 0.0
     current_time = truck.departure_time
     current_address = truck.current_address
 
@@ -132,7 +131,7 @@ def deliver_packages(truck):
         time_to_deliver = timedelta(hours = distance / truck.avg_speed)
         current_time += time_to_deliver
 
-        total_mileage += distance
+        truck.mileage += distance
 
         package = hash_map.search(package_id)
         package.status = "Delivered"
@@ -142,7 +141,7 @@ def deliver_packages(truck):
 
         current_address = next_package
 
-    print(f"Total mileage for this truck: {total_mileage} miles")
+    print(f"Total mileage for this truck: {truck.mileage} miles")
     return current_time
 
 # Begin delivery of trucks 1 and 2
@@ -152,3 +151,6 @@ truck2_current_time = deliver_packages(truck2)
 # but I already have its departure time set to 10:20 and truck1 finished at 9:42, so all is good there
 truck3_current_time = deliver_packages(truck3)
 #print(truck1_current_time, truck2_current_time, truck3_current_time)
+
+total_miles_travelled = truck1.mileage + truck2.mileage + truck3.mileage
+print(total_miles_travelled)
