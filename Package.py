@@ -9,6 +9,7 @@ class Package:
         self.zip_code = zip_code
         self.delivery_deadline = delivery_deadline
         self.weight = weight
+        self.delivery_time = None
 
     def __str__(self):
         return f'{self.ID}, {self.address}, {self.city}, {self.state}, {self.zip_code}, {self.delivery_deadline}, {self.weight}'

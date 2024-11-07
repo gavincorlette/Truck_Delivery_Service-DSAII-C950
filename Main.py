@@ -5,7 +5,7 @@ import csv
 from HashMap import ChainingHashTable
 from Package import Package
 from Truck import Truck
-import datetime
+from datetime import timedelta
 
 # Create hash table
 hash_map = ChainingHashTable()
@@ -36,7 +36,7 @@ with open('csv_files/package_file.csv') as csvfile3:
         address = row[1]
         city = row[2]
         state = row[3]
-        zip_code = row[4]
+        zip_code = int(row[4])
         delivery_deadline = row[5]
         weight = row[6]
 
@@ -68,11 +68,11 @@ def distance_between(x_val, y_val):
     return float(distance)
 
 # Load all 3 trucks
-truck1 = Truck(18, [15, 14, 19, 16, 13, 20, 1, 13, 15, 29, 30, 31, 34, 37, 40, 2], '4001 South 700 East', datetime.timedelta(hours = 8, minutes = 0), 'At Hub') # leave at 8:00
+truck1 = Truck(18, [15, 14, 19, 16, 13, 20, 1, 13, 15, 29, 30, 31, 34, 37, 40, 2], '4001 South 700 East', timedelta(hours = 8, minutes = 0), 'At Hub') # leave at 8:00
 
-truck2 = Truck(18, [3, 18, 36, 38, 6, 25, 28, 32, 4, 5, 7, 8, 10, 11, 12, 17], '4001 South 700 East', datetime.timedelta(hours = 9, minutes = 5), 'At Hub') # leave at 9:05
+truck2 = Truck(18, [3, 18, 36, 38, 6, 25, 28, 32, 4, 5, 7, 8, 10, 11, 12, 17], '4001 South 700 East', timedelta(hours = 9, minutes = 5), 'At Hub') # leave at 9:05
 
-truck3 = Truck(18, [9, 19, 21, 22, 23, 24, 26, 27, 33, 35, 39], '4001 South 700 East', datetime.timedelta(hours = 10, minutes = 20), 'At Hub') # leave at/after 10:20
+truck3 = Truck(18, [9, 19, 21, 22, 23, 24, 26, 27, 33, 35, 39], '4001 South 700 East', timedelta(hours = 10, minutes = 20), 'At Hub') # leave at/after 10:20
 
 # Method to find the shortest distance between two addresses
 def min_distance_from(current_address, remaining_addresses):
@@ -98,10 +98,10 @@ def min_distance_from(current_address, remaining_addresses):
             min_distance = distance
             next_address = package_address
 
-    return next_address, min_distance
+    return next_address
 
-best_distance = min_distance_from(truck2.current_address, truck2.package_list)
-print(best_distance)
+#best_distance = min_distance_from(truck1.current_address, truck1.package_list)
+#print(best_distance)
 '''package = hash_map.search(3)
 address = package.address
 print(address)'''
@@ -110,4 +110,45 @@ print(address)'''
 #between = distance_between(find_address_index('csv_files/addresses.csv', '195 W Oakland Ave'), find_address_index('csv_files/addresses.csv', '4580 S 2300 E'))
 #print(between)
 
-#def delivering_packages():
+def deliver_packages(truck):
+
+    total_mileage = 0.0
+    current_time = truck.departure_time
+    current_address = truck.current_address
+
+    while truck.packages_to_deliver():
+        next_package = min_distance_from(current_address, truck.package_list)
+
+        package_id = None
+        for pkg_id in truck.package_list:
+            if hash_map.search(pkg_id).address == next_package:
+                package_id = pkg_id
+                break
+
+        current_index = find_address_index('csv_files/addresses.csv', current_address)
+        package_index = find_address_index('csv_files/addresses.csv', next_package)
+        distance = distance_between(current_index, package_index)
+
+        time_to_deliver = timedelta(hours = distance / truck.avg_speed)
+        current_time += time_to_deliver
+
+        total_mileage += distance
+
+        package = hash_map.search(package_id)
+        package.status = "Delivered"
+        package.delivery_time = current_time
+
+        truck.deliver_package(package_id)
+
+        current_address = next_package
+
+    print(f"Total mileage for this truck: {total_mileage} miles")
+    return current_time
+
+# Begin delivery of trucks 1 and 2
+truck1_current_time = deliver_packages(truck1)
+truck2_current_time = deliver_packages(truck2)
+# Was gonna create a constraint here to make sure at least one of the trucks finished delivering before truck 3 can depart
+# but I already have its departure time set to 10:20 and truck1 finished at 9:42, so all is good there
+truck3_current_time = deliver_packages(truck3)
+#print(truck1_current_time, truck2_current_time, truck3_current_time)
