@@ -46,7 +46,7 @@ with open('csv_files/package_file.csv') as csvfile3:
         #Insert package into hash table
         hash_map.insert(ID, p)
 
-#print(hash_map.search(3))
+#print(hash_map.search(1))
 
 # Method to find index of passed in address
 def find_address_index(file_name, target_address):
@@ -82,18 +82,13 @@ def min_distance_from(current_address, remaining_addresses):
 
     # Loop to compare all addresses in list
     for package_id in remaining_addresses:
-        # Searches hash map to map ID to address
-        package_address = hash_map.search(int(package_id))
-        if package_address is None:
-            print(f"Error: Package ID {package_id} not found in hash map.")
-            continue
+        # Searches hash map to map ID to package info
+        package_info = hash_map.search(package_id)
+        # Assigns only address portion of package info to package_address
+        package_address = package_info.address
 
         current_index = find_address_index('csv_files/addresses.csv', current_address)
         package_index = find_address_index('csv_files/addresses.csv', package_address)
-
-        if current_index == -1 or package_index == -1:
-            print(f"Error: Invalid address index for {current_address} or {package_address}")
-            continue
 
         # Call distance_between method to compare distances
         distance = distance_between(current_index, package_index)
@@ -105,8 +100,11 @@ def min_distance_from(current_address, remaining_addresses):
 
     return next_address, min_distance
 
-best_distance = min_distance_from(truck1.current_address, truck1.package_list)
+best_distance = min_distance_from(truck2.current_address, truck2.package_list)
 print(best_distance)
+'''package = hash_map.search(3)
+address = package.address
+print(address)'''
 
 ## Example use of distance_between function; may need to alter as I develop algorithm
 #between = distance_between(find_address_index('csv_files/addresses.csv', '195 W Oakland Ave'), find_address_index('csv_files/addresses.csv', '4580 S 2300 E'))

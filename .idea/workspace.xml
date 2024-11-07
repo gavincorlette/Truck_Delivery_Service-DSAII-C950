@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7a93902-e72f-4bb2-8d83-85c270038a8e" name="Changes" comment="minor changes to truck class and main.py">
+    <list default="true" id="c7a93902-e72f-4bb2-8d83-85c270038a8e" name="Changes" comment="debugging for the hash search function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csv_files/package_file.csv" beforeDir="false" afterPath="$PROJECT_DIR$/csv_files/package_file.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +98,7 @@
       <workItem from="1730823105915" duration="6578000" />
       <workItem from="1730829915140" duration="811000" />
       <workItem from="1730897343841" duration="4998000" />
-      <workItem from="1730987365404" duration="1531000" />
+      <workItem from="1730987365404" duration="2731000" />
     </task>
     <task id="LOCAL-00001" summary="hashmap and csv files">
       <option name="closed" value="true" />
@@ -189,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730829352204</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="debugging for the hash search function">
+      <option name="closed" value="true" />
+      <created>1730989129443</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1730989129443</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,11 +224,12 @@
     <MESSAGE value="slight tweaks" />
     <MESSAGE value="altered distance_between a little bit" />
     <MESSAGE value="minor changes to truck class and main.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor changes to truck class and main.py" />
+    <MESSAGE value="debugging for the hash search function" />
+    <option name="LAST_COMMIT_MESSAGE" value="debugging for the hash search function" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DSA2$Package.coverage" NAME="Package Coverage Results" MODIFIED="1730646976663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DSA2$Truck.coverage" NAME="Truck Coverage Results" MODIFIED="1730738146044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DSA2$Main.coverage" NAME="Main Coverage Results" MODIFIED="1730988947314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DSA2$Main.coverage" NAME="Main Coverage Results" MODIFIED="1730990296161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
