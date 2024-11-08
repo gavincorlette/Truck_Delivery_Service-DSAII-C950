@@ -2,13 +2,13 @@
 # StudentID: 009934028
 # WGU Data Structures and Algorithms II (C950) PA
 import csv
-from HashMap import ChainingHashTable
+from HashMap import HashTable
 from Package import Package
 from Truck import Truck
 from datetime import timedelta
 
 # Create hash table
-hash_map = ChainingHashTable()
+hash_map = HashTable()
 # Hold distances
 distance_list = []
 # Hold addresses
@@ -25,11 +25,12 @@ with open('csv_files/distances.csv') as csvfile2:
     csv_distance = csv.reader(csvfile2, delimiter=',')
     for row in csv_distance:
         distance_list.append(row)
-        hash_map.insert(row[0], row[1])
+        hash_map.insert_into(row[0], row[1])
 
 # Opens and loads package_file
 with open('csv_files/package_file.csv') as csvfile3:
     csv_package = csv.reader(csvfile3, delimiter=',')
+    # Was having errors reading file, next(csv_package) fixed it
     next(csv_package)
     for row in csv_package:
         ID = int(row[0])
@@ -39,14 +40,15 @@ with open('csv_files/package_file.csv') as csvfile3:
         zip_code = int(row[4])
         delivery_deadline = row[5]
         weight = row[6]
+        status = 'At Hub'
 
         # Package object
-        p = Package(ID, address, city, state, zip_code, delivery_deadline, weight)
+        p = Package(ID, address, city, state, zip_code, delivery_deadline, weight, status)
 
         #Insert package into hash table
-        hash_map.insert(ID, p)
+        hash_map.insert_into(ID, p)
 
-#print(hash_map.search(1))
+#print(hash_map.search_for(1))
 
 # Method to find index of passed in address
 def find_address_index(file_name, target_address):
@@ -67,12 +69,12 @@ def distance_between(x_val, y_val):
         distance = distance_list[y_val][x_val]
     return float(distance)
 
-# Load all 3 trucks
-truck1 = Truck(18, [15, 14, 19, 16, 13, 20, 1, 13, 15, 29, 30, 31, 34, 37, 40, 2], '4001 South 700 East', timedelta(hours = 8, minutes = 0), 'At Hub', 0.0) # leave at 8:00
+# Load all 3 trucks keeping constraints required in mind
+truck1 = Truck(18, [15, 14, 16, 13, 20, 1, 29, 30, 31, 34, 37, 40, 2, 19, 4], '4001 South 700 East', timedelta(hours = 8, minutes = 0), 0.0) # leave at 8:00
 
-truck2 = Truck(18, [3, 18, 36, 38, 6, 25, 28, 32, 4, 5, 7, 8, 10, 11, 12, 17], '4001 South 700 East', timedelta(hours = 9, minutes = 5), 'At Hub', 0.0) # leave at 9:05
+truck2 = Truck(18, [3, 18, 36, 38, 28, 32, 5, 7, 8, 10, 11, 12, 17, 39, 6, 25], '4001 South 700 East', timedelta(hours = 9, minutes = 5), 0.0) # leave at 9:05
 
-truck3 = Truck(18, [9, 19, 21, 22, 23, 24, 26, 27, 33, 35, 39], '4001 South 700 East', timedelta(hours = 10, minutes = 20), 'At Hub', 0.0) # leave at/after 10:20
+truck3 = Truck(18, [9, 21, 22, 23, 24, 26, 27, 33, 35], '4001 South 700 East', timedelta(hours = 10, minutes = 20), 0.0) # leave at/after 10:20
 
 # Method to find the shortest distance between two addresses
 def min_distance_from(current_address, remaining_addresses):
@@ -83,7 +85,7 @@ def min_distance_from(current_address, remaining_addresses):
     # Loop to compare all addresses in list
     for package_id in remaining_addresses:
         # Searches hash map to map ID to package info
-        package_info = hash_map.search(package_id)
+        package_info = hash_map.search_for(package_id)
         # Assigns only address portion of package info to package_address
         package_address = package_info.address
 
@@ -102,7 +104,7 @@ def min_distance_from(current_address, remaining_addresses):
 
 #best_distance = min_distance_from(truck1.current_address, truck1.package_list)
 #print(best_distance)
-'''package = hash_map.search(3)
+'''package = hash_map.search_for(3)
 address = package.address
 print(address)'''
 
@@ -110,17 +112,23 @@ print(address)'''
 #between = distance_between(find_address_index('csv_files/addresses.csv', '195 W Oakland Ave'), find_address_index('csv_files/addresses.csv', '4580 S 2300 E'))
 #print(between)
 
+# Implementation of delivering the packages
 def deliver_packages(truck):
 
     current_time = truck.departure_time
     current_address = truck.current_address
 
+    for package_id in truck.package_list:
+        package = hash_map.search_for(package_id)
+        package.departure_time = truck.departure_time
+
+    # Loop keeping track of time and deliveries while array is full
     while truck.packages_to_deliver():
         next_package = min_distance_from(current_address, truck.package_list)
 
         package_id = None
         for pkg_id in truck.package_list:
-            if hash_map.search(pkg_id).address == next_package:
+            if hash_map.search_for(pkg_id).address == next_package:
                 package_id = pkg_id
                 break
 
@@ -133,24 +141,45 @@ def deliver_packages(truck):
 
         truck.mileage += distance
 
-        package = hash_map.search(package_id)
-        package.status = "Delivered"
+        package = hash_map.search_for(package_id)
         package.delivery_time = current_time
 
         truck.deliver_package(package_id)
 
         current_address = next_package
 
-    print(f"Total mileage for this truck: {truck.mileage} miles")
+    #print(f"Total mileage for this truck: {truck.mileage} miles")
     return current_time
 
-# Begin delivery of trucks 1 and 2
+# Begin delivery of trucks (assigning to new variables to check finish time)
 truck1_current_time = deliver_packages(truck1)
 truck2_current_time = deliver_packages(truck2)
 # Was gonna create a constraint here to make sure at least one of the trucks finished delivering before truck 3 can depart
 # but I already have its departure time set to 10:20 and truck1 finished at 9:42, so all is good there
 truck3_current_time = deliver_packages(truck3)
+## Checking to see truck finish times
 #print(truck1_current_time, truck2_current_time, truck3_current_time)
 
 total_miles_travelled = truck1.mileage + truck2.mileage + truck3.mileage
-print(total_miles_travelled)
+#print(total_miles_travelled)
+
+class Main:
+    print("Western Governors University Parcel Service (WGUPS)")
+    print(f"The total mileage traveled on this route was {total_miles_travelled} miles.")
+    print()
+    user_input = input("To start, please type \"start\": ")
+    if user_input.lower() == 'start':
+        time = input("Please enter the time to check the status of your package using the HH:MM:SS format: ")
+        (h, m, s) = time.split(":")
+        convert_time = timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+        all_or_one = input("If you'd like to view all packages, please type \"all\". Otherwise, please type the package number: ")
+        if all_or_one.lower() == 'all':
+            for package_id in range(1, 41):
+                package = hash_map.search_for(package_id)
+                package.update_status(convert_time)
+                print(package)
+        else:
+            package_id = int(all_or_one)
+            package = hash_map.search_for(package_id)
+            package.update_status(convert_time)
+            print(package)
