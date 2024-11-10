@@ -1,19 +1,19 @@
 
 # Code is from WGU Webinar 1 - Let's Go Hashing
 
-# HashTable class using chaining
+# HashTable class
 class HashTable:
     # Assigns all buckets with an empty list
     def __init__(self, initial_capacity = 40):
         # Initialize the hash table with empty bucket list entries
-        self.table = []
+        self.array = []
         for i in range(initial_capacity):
-            self.table.append([])
+            self.array.append([])
 
     def search_for(self, key):
         # Get the bucket list where the key would be
-        bucket = hash(key) % len(self.table)
-        bucket_list = self.table[bucket]
+        bucket = hash(key) % len(self.array)
+        bucket_list = self.array[bucket]
 
         # Search for the key in the bucket list
         for key_value in bucket_list:
@@ -23,8 +23,8 @@ class HashTable:
 
     def insert_into(self, key, item):
         # Get the bucket list where this item will go
-        bucket = hash(key) % len(self.table)
-        bucket_list = self.table[bucket]
+        bucket = hash(key) % len(self.array)
+        bucket_list = self.array[bucket]
 
         # Update key if it is already in the bucket
         for key_value in bucket_list:
@@ -39,8 +39,8 @@ class HashTable:
 
     def remove_from(self, key):
         # Get the bucket list where this item will be removed from
-        bucket = hash(key) % len(self.table)
-        bucket_list = self.table[bucket]
+        bucket = hash(key) % len(self.array)
+        bucket_list = self.array[bucket]
 
         # Remove the item from the bucket list if it is present
         for key_value in bucket_list:

@@ -70,11 +70,11 @@ def distance_between(x_val, y_val):
     return float(distance)
 
 # Load all 3 trucks keeping constraints required in mind
-truck1 = Truck(18, [15, 14, 16, 13, 20, 1, 29, 30, 31, 34, 37, 40, 2, 19, 4], '4001 South 700 East', timedelta(hours = 8, minutes = 0), 0.0) # leave at 8:00
+truck1 = Truck(18, [15, 14, 16, 13, 20, 1, 29, 30, 31, 34, 37, 40, 2, 19, 4, 39], '4001 South 700 East', timedelta(hours = 8, minutes = 0), 0.0) # leave at 8:00
 
-truck2 = Truck(18, [3, 18, 36, 38, 28, 32, 5, 7, 8, 10, 11, 12, 17, 39, 6, 25], '4001 South 700 East', timedelta(hours = 9, minutes = 5), 0.0) # leave at 9:05
+truck2 = Truck(18, [3, 18, 36, 38, 28, 32, 6, 25], '4001 South 700 East', timedelta(hours = 9, minutes = 5), 0.0) # leave at 9:05
 
-truck3 = Truck(18, [9, 21, 22, 23, 24, 26, 27, 33, 35], '4001 South 700 East', timedelta(hours = 10, minutes = 20), 0.0) # leave at/after 10:20
+truck3 = Truck(18, [9, 21, 22, 23, 24, 26, 27, 33, 35, 5, 7, 8, 10, 11, 12, 17], '4001 South 700 East', timedelta(hours = 10, minutes = 20), 0.0) # leave at/after 10:20
 
 # Method to find the shortest distance between two addresses
 def min_distance_from(current_address, remaining_addresses):
@@ -160,6 +160,7 @@ truck3_current_time = deliver_packages(truck3)
 ## Checking to see truck finish times
 #print(truck1_current_time, truck2_current_time, truck3_current_time)
 
+# Sums up each of the trucks' mileage
 total_miles_travelled = truck1.mileage + truck2.mileage + truck3.mileage
 #print(total_miles_travelled)
 
@@ -170,16 +171,22 @@ class Main:
     user_input = input("To start, please type \"start\": ")
     if user_input.lower() == 'start':
         time = input("Please enter the time to check the status of your package using the HH:MM:SS format: ")
+        # Splits time input up by the colon and assigns each portion of the time to h, m, and s
         (h, m, s) = time.split(":")
+        # Convert the values into time format
         convert_time = timedelta(hours=int(h), minutes=int(m), seconds=int(s))
         all_or_one = input("If you'd like to view all packages, please type \"all\". Otherwise, please type the package number: ")
         if all_or_one.lower() == 'all':
+            # Loops through all packages
             for package_id in range(1, 41):
                 package = hash_map.search_for(package_id)
+                # Updates package status based on user's time input
                 package.update_status(convert_time)
                 print(package)
         else:
+            # Picks specific package input by user
             package_id = int(all_or_one)
             package = hash_map.search_for(package_id)
+            # Updates package status based on user's time input
             package.update_status(convert_time)
             print(package)
