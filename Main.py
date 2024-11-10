@@ -74,6 +74,8 @@ truck1 = Truck(18, [15, 14, 16, 13, 20, 1, 29, 30, 31, 34, 37, 40, 2, 19, 4, 39]
 
 truck2 = Truck(18, [3, 18, 36, 38, 28, 32, 6, 25], '4001 South 700 East', timedelta(hours = 9, minutes = 5), 0.0) # leave at 9:05
 
+# I updated package 9's address to the correct one in package_file.csv
+# Placed it on truck 3 to satisfy requirement of leaving at 10:20
 truck3 = Truck(18, [9, 21, 22, 23, 24, 26, 27, 33, 35, 5, 7, 8, 10, 11, 12, 17], '4001 South 700 East', timedelta(hours = 10, minutes = 20), 0.0) # leave at/after 10:20
 
 # Method to find the shortest distance between two addresses
@@ -164,7 +166,9 @@ truck3_current_time = deliver_packages(truck3)
 total_miles_travelled = truck1.mileage + truck2.mileage + truck3.mileage
 #print(total_miles_travelled)
 
+# User interface
 class Main:
+    print()
     print("Western Governors University Parcel Service (WGUPS)")
     print(f"The total mileage traveled on this route was {total_miles_travelled} miles.")
     print()
@@ -183,6 +187,7 @@ class Main:
                 # Updates package status based on user's time input
                 package.update_status(convert_time)
                 print(package)
+        # Else if user picks specific package number
         else:
             # Picks specific package input by user
             package_id = int(all_or_one)

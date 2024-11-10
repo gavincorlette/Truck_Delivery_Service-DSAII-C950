@@ -32,7 +32,7 @@ class HashTable:
                 key_value[1] = item
                 return True
 
-        # Else, insert the item to the end of the bucket list
+        # Otherwise insert the item to the end of the bucket list
         key_value = [key, item]
         bucket_list.append(key_value)
         return True
