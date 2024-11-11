@@ -179,6 +179,9 @@ class Main:
         (h, m, s) = time.split(":")
         # Convert the values into time format
         convert_time = timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+        # Apply update_address method to only package 9
+        package_9 = hash_map.search_for(9)
+        package_9.update_address(convert_time)
         all_or_one = input("If you'd like to view all packages, please type \"all\". Otherwise, please type the package number: ")
         if all_or_one.lower() == 'all':
             # Loops through all packages

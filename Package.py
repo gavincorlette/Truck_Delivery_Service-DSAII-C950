@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 
 # Create package class
 class Package:
@@ -24,3 +26,12 @@ class Package:
             self.status = 'En Route'
         else:
             self.status = 'Delivered'
+
+    # Display old address for package 9 if user looks up time before 10:20
+    def update_address(self, convert_time):
+        if convert_time < timedelta(hours=10, minutes=20, seconds=0):
+            self.address = '300 State St'
+            self.zip_code = '84103'
+        else:
+            self.address = '410 S. State St'
+            self.zip_code = '84111'
