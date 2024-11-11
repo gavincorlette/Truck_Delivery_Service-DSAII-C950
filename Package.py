@@ -14,9 +14,10 @@ class Package:
         self.status = status
         self.departure_time = None
         self.delivery_time = None
+        self.truck_number = None
 
     def __str__(self):
-        return f'{self.ID}, {self.address}, {self.city}, {self.state}, {self.zip_code}, {self.delivery_deadline}, {self.weight}, {self.status}, {self.delivery_time}'
+        return f'{self.ID}, {self.address}, {self.city}, {self.state}, {self.zip_code}, {self.delivery_deadline}, {self.weight}, {self.status}, {self.delivery_time}, {self.truck_number}'
 
     # Moved the logic for updating package status to this method
     def update_status(self, convert_time):

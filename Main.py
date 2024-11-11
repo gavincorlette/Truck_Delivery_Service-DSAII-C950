@@ -123,6 +123,13 @@ def deliver_packages(truck):
     for package_id in truck.package_list:
         package = hash_map.search_for(package_id)
         package.departure_time = truck.departure_time
+        # Added this to determine truck number each package is on
+        if package.departure_time == timedelta(hours=8, minutes=0):
+            package.truck_number = 'Truck 1'
+        elif package.departure_time == timedelta(hours=9, minutes=5):
+            package.truck_number = 'Truck 2'
+        elif package.departure_time == timedelta(hours=10, minutes=20):
+            package.truck_number = 'Truck 3'
 
     # Loop keeping track of time and deliveries while array is full
     while truck.packages_to_deliver():
