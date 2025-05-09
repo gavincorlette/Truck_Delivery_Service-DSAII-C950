@@ -52,12 +52,19 @@ Inside the program, you can:
 ## Project Structure
 
 ```
-├── main.py                  # Main driver file
-├── package.py               # Package class with update logic
-├── truck.py                 # Truck class with delivery simulation
-├── distances.csv            # Distance table between addresses
-├── addresses.csv            # Address index
-└── README.md                # Project documentation
+WGUPS Project/
+│
+├── csv_files/
+│   ├── addresses.csv
+│   ├── distances.csv
+│   └── package_file.csv
+│
+├── HashMap.py
+├── Package.py
+├── Truck.py
+├── main.py
+├── README.md
+
 ```
 
 ## Special Constraints
