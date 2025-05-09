@@ -31,13 +31,13 @@ This project was built as part of WGU's Data Structures and Algorithms II course
 - **Delivery Simulation**  
   Tracks delivery time and calculates when each package is delivered based on truck speed (18 mph).
 
-## 🛠 Technologies
+## Technologies
 
 - Python 3
 - Standard Library (`datetime`, `csv`, etc.)
 - Object-Oriented Programming (OOP)
 
-## 📦 Example Usage
+## Example Usage
 
 ```bash
 # Run the main delivery simulation
